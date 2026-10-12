@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Sunnyside Mobile Bar</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            50: '#f0f4f1',
+                            100: '#d9e5db',
+                            600: '#2c5e3a',
+                            800: '#1b3b24',
+                            900: '#122718'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-forest-50/50 text-stone-800 antialiased min-h-screen flex flex-col justify-between selection:bg-forest-600 selection:text-white">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-forest-600 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-martini-glass-citrus text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-forest-600 font-semibold block">Mobile Bar Service</span>
+                    <h1 class="text-xl font-bold text-stone-900 tracking-tight">Mobile Bartender</h1>
+                </div>
+            </div>
+            <button onclick="openContactModal()" class="bg-forest-600 hover:bg-forest-800 text-white px-4 py-2 rounded-xl text-sm font-medium transition duration-200 shadow-sm flex items-center space-x-2">
+                <i class="fa-regular fa-envelope"></i>
+                <span class="hidden sm:inline">Contact Us</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="bg-gradient-to-b from-white to-forest-50/60 py-16 px-4 sm:px-6 lg:px-8 border-b border-stone-200/60">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center space-x-2 bg-forest-100/80 text-forest-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-circle-question text-[10px]"></i>
+                    <span>Help & Information</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight mb-4">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-stone-600 text-base sm:text-lg mb-8 leading-relaxed">
+                    Everything you need to know about booking <span class="font-semibold text-stone-800">Mobile Bartender</span> for your upcoming Washington state wedding, private party, or celebration.
+                </p>
+
+                <!-- Search Bar -->
+                <div class="relative max-w-xl mx-auto">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
+                        <i class="fa-solid fa-search"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="faqSearch" 
+                        oninput="filterFAQs()"
+                        placeholder="Search questions (e.g., pricing, alcohol, license, travel)..." 
+                        class="w-full pl-11 pr-4 py-3.5 bg-white border border-stone-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-transparent text-stone-800 placeholder-stone-400 transition"
+                    >
+                    <button id="clearSearch" onclick="resetSearch()" class="absolute inset-y-0 right-0 pr-4 flex items-center text-stone-400 hover:text-stone-600 hidden">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content Section -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- No Results State -->
+            <div id="noResults" class="hidden text-center py-16 bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+                <div class="w-16 h-16 bg-forest-50 text-forest-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="text-lg font-bold text-stone-900 mb-1">No matching questions found</h3>
+                <p class="text-stone-500 text-sm mb-6">We couldn't find anything matching your search. Feel free to reach out to Jesse directly!</p>
+                <button onclick="resetSearch()" class="bg-forest-600 text-white px-5 py-2 rounded-xl text-sm font-medium hover:bg-forest-800 transition">
+                    Clear Search
+                </button>
+            </div>
+
+            <div id="faqContainer" class="space-y-6">
+
+                <!-- Category 1: How does it work? -->
+                <div class="faq-category bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden transition" data-category="booking setup working">
+                    <div class="bg-forest-50/50 px-6 py-4 border-b border-stone-100 flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-glass-water"></i>
+                        </div>
+                        <h3 class="font-semibold text-stone-900 text-lg">The Experience & Setup</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        <!-- Item 1 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">How does it work?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>We bring the bar and experienced bartenders straight to you! Here is what is included:</p>
+                                <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                                    <li>Ice, house-made mixers, garnishes, and professional bar tools.</li>
+                                    <li>Water station and recyclable cups (limited glassware is available for an additional fee).</li>
+                                </ul>
+                                <p><strong>What you provide:</strong> You provide the alcohol and a day banquet license, which can easily be obtained on the Washington State liquor board website for around $10.</p>
+                                <p><strong>Consultation & Menu Design:</strong> You will have a consultation and tasting with Jesse to go over the bar menu. He will help you calculate exactly how much alcohol you will need based on your guest count, length of reception or party, and preferences.</p>
+                                <p><strong>Recommendation:</strong> We highly recommend choosing one or two signature drinks for your event in addition to standard beer and wine. This keeps the service streamlined and creates an exceptionally elegant affair.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: How do you charge us? -->
+                <div class="faq-category bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden transition" data-category="pricing cost travel bartenders fee">
+                    <div class="bg-forest-50/50 px-6 py-4 border-b border-stone-100 flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="font-semibold text-stone-900 text-lg">Pricing, Travel & Bartending</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        <!-- Item 2 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">How do you charge us?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>We charge for the rental of Mobile Bartender, set up, breakdown, and professional bartending service.</p>
+                                <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                                    <li><strong>Travel Radius:</strong> Our price includes travel within 25 miles of the North Kitsap Area. We will gladly travel outside this range for an additional fee of $1/mile. Please check the Investment page for specific pricing and add-ons.</li>
+                                    <li><strong>Bartending Service:</strong> $50/hr per bartender. The number of bartenders needed depends on your guest count. For example, 2 bartenders can seamlessly manage up to 150 guests. More guests = more bartenders.</li>
+                                </ul>
+                                <p class="bg-forest-50/70 p-4 rounded-xl text-forest-900 border border-forest-100 text-sm">
+                                    <i class="fa-solid fa-circle-info mr-2 text-forest-600"></i>Please contact us for custom pricing details as we love working closely with you on what you need for your specific event!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">What are your geographic and travel limitations?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>As much as we would love to, <strong>we cannot take Mobile Bartender to the San Juan Islands</strong> due to the precariousness of the ferry and the requirement to stay overnight.</p>
+                                <p>However, we can travel to <strong>Vashon and Whidbey Island</strong> (additional fee applies for the ferry cost).</p>
+                                <p>Lastly, our "travel outside of 25 miles of Kitsap Area" is within reason, meaning within a 60–90 minute drive of North Kitsap. (The Sidecar is a vintage antique vehicle, so we drive very carefully when hauling her!)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Can we have a cash bar? -->
+                <div class="faq-category bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden transition" data-category="cash bar alcohol laws non profit fundraiser">
+                    <div class="bg-forest-50/50 px-6 py-4 border-b border-stone-100 flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-wine-bottle"></i>
+                        </div>
+                        <h3 class="font-semibold text-stone-900 text-lg">Alcohol & State Laws</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        <!-- Item 4 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">Can we have a cash bar?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>As it stands, Washington state liquor laws strictly prevent us from selling alcohol directly. This is why we require the Host(s) to provide the booze prior to the event. We handle everything thereafter to make sure you can enjoy your celebration without any hassle.</p>
+                                <p><strong>Non-Profit Exception:</strong> We can accommodate a cash bar for a registered non-profit fundraiser where 100% of the proceeds go directly to the non-profit organization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: What is your payment/cancellation policy? -->
+                <div class="faq-category bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden transition" data-category="payment cancellation deposit contract policy">
+                    <div class="bg-forest-50/50 px-6 py-4 border-b border-stone-100 flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <h3 class="font-semibold text-stone-900 text-lg">Payments & Policies</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        <!-- Item 5 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">What is your payment / cancellation policy?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>We require a <strong>30% non-refundable deposit</strong> along with a signed contract to officially save and secure your date on our calendar.</p>
+                                <p>The remaining payment in full is due the day before your event.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5: Miscellaneous & Licensing -->
+                <div class="faq-category bg-white rounded-2xl border border-stone-200/80 shadow-sm overflow-hidden transition" data-category="licensed insured class 12 permit miscellaneous">
+                    <div class="bg-forest-50/50 px-6 py-4 border-b border-stone-100 flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-forest-100 text-forest-800 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="font-semibold text-stone-900 text-lg">Licensing & Safety</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        <!-- Item 6 -->
+                        <div class="faq-item group">
+                            <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-stone-50/50 transition">
+                                <span class="font-semibold text-stone-800 text-base sm:text-lg pr-4 group-hover:text-forest-800 transition">Are you licensed and insured?</span>
+                                <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center shrink-0 transition transform duration-200">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </span>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6 text-stone-600 space-y-4 text-base leading-relaxed border-t border-stone-50 pt-3">
+                                <p>Yes, absolutely! We are fully licensed and insured. Furthermore, all of our professional bartenders carry a <strong>Class 12 permit</strong> to serve legally and responsibly in the state of Washington.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Call to Action Footer Banner -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div class="bg-gradient-to-br from-forest-900 to-forest-800 rounded-3xl p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-forest-600/20 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+                    <span class="text-xs uppercase tracking-widest text-forest-100/80 font-semibold block">Got More Questions?</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight">Still have questions? Let's chat!</h3>
+                    <p class="text-forest-100 text-base leading-relaxed">
+                        Whether you are ready to book or want to discuss a custom setup for your wedding or private party in Washington state, Jesse is here to help.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="openContactModal()" class="bg-white text-forest-900 hover:bg-forest-50 px-8 py-3.5 rounded-xl font-semibold transition duration-200 shadow-md">
+                            Contact Jesse
+                        </button>
+                        <a href="tel:5551234567" class="border border-forest-100/30 hover:bg-forest-800 text-white px-8 py-3.5 rounded-xl font-semibold transition duration-200 inline-flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                            <span>Call or Text Us</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-8 text-center text-sm text-stone-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-6 h-6 rounded-full bg-forest-600 flex items-center justify-center text-white text-xs">
+                    <i class="fa-solid fa-martini-glass-citrus"></i>
+                </div>
+                <span class="font-bold text-stone-800">Mobile Bartender Bar</span>
+            </div>
+            <p>&copy; 2026 The Sidecar Mobile Bar. Serving North Kitsap & Surrounding Areas, WA.</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative transform transition-all animate-in fade-in zoom-in-95 duration-200">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 w-9 h-9 bg-stone-100 hover:bg-stone-200 text-stone-600 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-widest text-forest-600 font-semibold block mb-1">Get in Touch</span>
+                <h3 class="text-2xl font-bold text-stone-900 tracking-tight">Contact The Sidecar</h3>
+                <p class="text-stone-600 text-sm mt-1">Fill out the quick form below and Jesse will get back to you promptly.</p>
+            </div>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase mb-1">Your Name</label>
+                    <input type="text" required class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest-600 text-stone-800 text-sm" placeholder="Jane Doe">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 uppercase mb-1">Email Address</label>
+                        <input type="email" required class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest-600 text-stone-800 text-sm" placeholder="jane@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 uppercase mb-1">Event Date</label>
+                        <input type="date" class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest-600 text-stone-800 text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase mb-1">Message / Event Details</label>
+                    <textarea rows="4" required class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest-600 text-stone-800 text-sm" placeholder="Estimated guest count, location, type of event..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-forest-600 hover:bg-forest-800 text-white font-semibold py-3.5 rounded-xl transition duration-200 shadow-md">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message Toast -->
+    <div id="toastMessage" class="fixed bottom-6 right-6 z-50 bg-stone-900 text-white px-6 py-4 rounded-2xl shadow-xl flex items-center space-x-3 transform translate-y-32 opacity-0 transition-all duration-300">
+        <div class="w-7 h-7 bg-forest-600 rounded-full flex items-center justify-center text-white text-xs">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <h5 class="font-semibold text-sm">Message Sent Successfully!</h5>
+            <p class="text-xs text-stone-300">Jesse will review your inquiry and reach out shortly.</p>
+        </div>
+    </div>
+
+    <script>
+        // Accordion Toggle Logic
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const iconContainer = button.querySelector('span:last-child');
+            const isHidden = content.classList.contains('hidden');
+
+            // Close all other accordions optionally or keep open (here we keep open independently or can toggle)
+            if (isHidden) {
+                content.classList.remove('hidden');
+                iconContainer.classList.add('rotate-180', 'bg-forest-100', 'text-forest-800');
+                iconContainer.classList.remove('bg-stone-100', 'text-stone-600');
+            } else {
+                content.classList.add('hidden');
+                iconContainer.classList.remove('rotate-180', 'bg-forest-100', 'text-forest-800');
+                iconContainer.classList.add('bg-stone-100', 'text-stone-600');
+            }
+        }
+
+        // Real-time Search Filter Logic
+        function filterFAQs() {
+            const query = document.getElementById('faqSearch').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearch');
+            const categories = document.querySelectorAll('.faq-category');
+            const noResults = document.getElementById('noResults');
+            
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            let totalVisibleCategories = 0;
+
+            categories.forEach(category => {
+                const searchKeywords = category.getAttribute('data-category') || '';
+                const textContent = category.innerText.toLowerCase();
+                
+                // Check if query matches keywords or full text content
+                if (searchKeywords.includes(query) || textContent.includes(query)) {
+                    category.classList.remove('hidden');
+                    totalVisibleCategories++;
+
+                    // If user is searching specifically, we can auto-expand matching accordion items
+                    if (query.length >= 2) {
+                        const items = category.querySelectorAll('.faq-item');
+                        items.forEach(item => {
+                            const itemText = item.innerText.toLowerCase();
+                            const content = item.querySelector('.faq-content');
+                            const iconContainer = item.querySelector('button span:last-child');
+                            if (itemText.includes(query)) {
+                                content.classList.remove('hidden');
+                                iconContainer.classList.add('rotate-180', 'bg-forest-100', 'text-forest-800');
+                            }
+                        });
+                    }
+                } else {
+                    category.classList.add('hidden');
+                }
+            });
+
+            if (totalVisibleCategories === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        function resetSearch() {
+            const searchInput = document.getElementById('faqSearch');
+            searchInput.value = '';
+            document.getElementById('clearSearch').classList.add('hidden');
+            document.getElementById('noResults').classList.add('hidden');
+            
+            const categories = document.querySelectorAll('.faq-category');
+            categories.forEach(cat => cat.classList.remove('hidden'));
+
+            // Collapse all accordions
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-item button span:last-child').forEach(icon => {
+                icon.classList.remove('rotate-180', 'bg-forest-100', 'text-forest-800');
+                icon.classList.add('bg-stone-100', 'text-stone-600');
+            });
+        }
+
+        // Modal Controls
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form Submission Simulation
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            closeContactModal();
+
+            const toast = document.getElementById('toastMessage');
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+
+            event.target.reset();
+        }
+
+        // Close modal on background click
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactModal();
+            }
+        }
+    </script>
+</body>
+</html>
