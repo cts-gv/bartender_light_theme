@@ -9,6 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className="js"</script>
+<script src="config.js"></script>
+<script>
+if(window.SITE&&SITE.heroPoster){var pl=document.createElement("link");pl.rel="preload";pl.as="image";pl.href=SITE.heroPoster;document.head.appendChild(pl)}
+</script>
 <style>
 :root{--pearl:#F6F7F4;--white:#fff;--ink:#17212B;--muted:#5C6670;--sage:#DCE5DF;--juniper:#2C4A40;--brass:#A58A4E;--line:#DDE1DC;
 --serif:"Cormorant Garamond",Georgia,serif;--sans:"Hanken Grotesk",system-ui,sans-serif}
@@ -163,13 +167,14 @@ footer a{color:var(--juniper)}
 </head>
 <body>
 <header><div class="wrap"><a class="logo" href="#top" id="logo"></a>
-<nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav><nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav>
+<nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav>
 <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
 
 <main id="top">
 <section class="hero" id="hero">
   <video id="heroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <script>(function(){var v=document.getElementById("heroVideo"),S=window.SITE;if(S&&S.heroVideo){if(S.heroPoster)v.poster=S.heroPoster;v.src=S.heroVideo}else{v.remove()}})()</script>
   <div class="wrap">
     <h1>Craft cocktails, poured <em>wherever</em> you celebrate.</h1>
     <p id="heroSub"></p>
@@ -237,7 +242,6 @@ footer a{color:var(--juniper)}
 
 <footer><div class="wrap"><span id="foot"></span><br>Website crafted by: <a href="https://communitytechsolutions.com" target="_blank" rel="noopener">Community Tech Solutions</a></div></footer>
 
-<script src="config.js"></script>
 <script>
 const S=window.SITE,P=S.pricing,$=id=>document.getElementById(id);
 document.title=S.name+" | Mobile bartending in "+S.city;
@@ -249,8 +253,6 @@ $("aboutLead").textContent="Based in "+S.city+", we bring the full bar to your v
 $("foot").innerHTML="© "+new Date().getFullYear()+" "+S.name+" · "+S.city+' · <a href="faqs.html">FAQs</a>';
 
 // hero video
-const v=$("heroVideo");
-if(S.heroVideo){v.src=S.heroVideo;if(S.heroPoster)v.poster=S.heroPoster}else{v.remove()}
 if(S.heroPoster)$("hero").style.backgroundImage="url("+S.heroPoster+")";
 
 // ticker (set repeated twice per half so it never shows a gap)
