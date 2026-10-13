@@ -32,7 +32,18 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 .logo{font:500 1.35rem var(--serif);text-decoration:none}
 nav{display:flex;gap:1.5rem;font-size:.9rem}
 nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--ink)}
-@media(max-width:700px){nav a:not(.cta){display:none}}
+.menu-btn{display:none}
+@media(max-width:700px){
+  .menu-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 10px;background:none;border:0;cursor:pointer}
+  .menu-btn span{display:block;height:2px;background:var(--ink);transition:transform .25s,opacity .2s}
+  .menu-btn[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn[aria-expanded=true] span:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--pearl);border-bottom:1px solid var(--line);padding:.5rem 1.1rem 1rem}
+  nav.open{display:flex}
+  nav a{padding:.85rem 0;font-size:1rem;border-bottom:1px solid var(--line)}
+  nav a:last-child{border-bottom:0}
+}
 nav .cta{color:var(--juniper);font-weight:600}
 
 /* hero */
@@ -152,7 +163,9 @@ footer a{color:var(--juniper)}
 </head>
 <body>
 <header><div class="wrap"><a class="logo" href="#top" id="logo"></a>
-<nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav></div></header>
+<nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav><nav><a href="#about">The bartenders</a><a href="#services">Packages</a><a href="#events">Events</a><a class="cta" href="#quote">Get a quote</a></nav>
+<button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div></header>
 
 <main id="top">
 <section class="hero" id="hero">
@@ -291,7 +304,11 @@ $("quoteForm").addEventListener("submit",e=>{
   e.preventDefault();const f=e.target,q=calc();
   send("quote_requests",{name:f.name.value.trim(),email:f.email.value.trim(),phone:f.phone.value.trim(),event_type:f.event_type.value,event_date:f.event_date.value,guests:+f.guests.value,hours:q.h,package:q.pkg,addons:q.add,estimate_low:q.lo,estimate_high:q.hi,message:f.message.value.trim()},f,"quoteMsg","Thank you. Your quote request is in, and we will reply within one business day.");
 });
-
+  
+// mobile menu
+const mb=document.querySelector(".menu-btn"),nv=document.querySelector("header nav");
+mb.addEventListener("click",()=>{const o=nv.classList.toggle("open");mb.setAttribute("aria-expanded",o)});
+nv.addEventListener("click",e=>{if(e.target.tagName==="A"){nv.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
 
 // scroll reveal
 const rv=[...document.querySelectorAll(".rv")];
