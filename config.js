@@ -53,8 +53,8 @@ window.SITE = {
   // QUOTE ESTIMATOR - placeholder numbers, set your real rates
   pricing: {
     perBartenderHour: 100,       // $ per bartender per hour
-    minHours: 3,
-    guestsPerBartender: 50,     // 51+ guests automatically books both bartenders
+    minHours: 4,
+    guestsPerBartender: 60,     // 61+ guests automatically books both bartenders
     packages: [
       { id: "essential", name: "Essential", desc: "Bar setup, bartending, ice, garnishes and cups. You supply the alcohol.", perGuest: 0 },
       { id: "signature", name: "Signature", desc: "Everything in Essential, plus a custom cocktail menu with mixers and syrups.", perGuest: 8 },
